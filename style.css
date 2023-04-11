@@ -55,6 +55,12 @@ canvas.spell-viz {
     --pausetext-scale: 0.5;
 }
 
+canvas.drawgrid {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+}
+
 .drawgrid {
     touch-action: none;
 }

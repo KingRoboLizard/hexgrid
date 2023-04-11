@@ -1,5 +1,7 @@
 const canvas = document.querySelector(".drawgrid");
 const ctx = canvas.getContext("2d");
+const background = document.querySelector(".drawbg");
+const bgctx = background.getContext("2d");
 const hue = document.getElementById("hue");
 const sat = document.getElementById("sat");
 const lum = document.getElementById("lum");
@@ -10,11 +12,26 @@ let rgb2hex = (r, g, b) => "#" + [r, g, b].map(x => Math.round(x * 255).toString
 
 canvas.width = document.body.clientWidth;
 canvas.height = document.body.clientHeight;
+background.width = document.body.clientWidth;
+background.height = document.body.clientHeight;
+
+let points = []
+pointGrid();
+
+points.forEach(h => {   //draw the pointgrid to bg
+    h.show();
+});
 
 addEventListener("resize", () => {
     canvas.width = document.body.clientWidth;
     canvas.height = document.body.clientHeight;
+    background.width = document.body.clientWidth;
+    background.height = document.body.clientHeight;
     pointGrid();
+    bgctx.clearRect(0, 0, background.width, background.height)
+    points.forEach(h => {
+        h.show();
+    });
 });
 
 var modal = document.getElementById("modal");
@@ -182,16 +199,15 @@ hue.addEventListener("input", updateCol)
 sat.addEventListener("input", updateCol)
 lum.addEventListener("input", updateCol)
 
-function updateCol(){
+function updateCol() {
     document.documentElement.style.setProperty('--col', hue.value);
-    document.documentElement.style.setProperty('--lum', lum.value+'%');
-    document.documentElement.style.setProperty('--sat', sat.value+'%');
+    document.documentElement.style.setProperty('--lum', lum.value + '%');
+    document.documentElement.style.setProperty('--sat', sat.value + '%');
     hex.value = col1;
-    console.log("e")
     let rgb = hsl2rgb(hue.value, sat.value / 100, lum.value / 100);
-    document.getElementById("r").value = Math.round(rgb[0]*255);
-    document.getElementById("g").value = Math.round(rgb[1]*255);
-    document.getElementById("b").value = Math.round(rgb[2]*255);
+    document.getElementById("r").value = Math.round(rgb[0] * 255);
+    document.getElementById("g").value = Math.round(rgb[1] * 255);
+    document.getElementById("b").value = Math.round(rgb[2] * 255);
 }
 
 let patternList;
@@ -219,7 +235,6 @@ for (let i = 0; i < patternList.length; i++) {
 }
 
 let nearestPoint;
-let points = []
 let lines = []
 lines.push(new Line(-100, 0, 0, 0, 1));
 
@@ -237,7 +252,6 @@ function SetLoc() {
     clickY = nearestPoint.y;
 }
 
-pointGrid();
 function pointGrid() {
     for (let y = 0; y < canvas.height / 80 + 1; y++) {
         for (let i = 0; i < canvas.width / 40; i++) {
@@ -316,20 +330,25 @@ function GetClosestNumber(val, grid) {
 let stack = [];
 
 window.requestAnimationFrame(loop);
+
+var filterStrength = 60;
+var frameTime = 0, lastLoop = new Date, thisLoop;
 function loop() {
+    var thisFrameTime = (thisLoop = new Date) - lastLoop;
+    frameTime += (thisFrameTime - frameTime) / filterStrength;
+    lastLoop = thisLoop;
+
     col1 = rgb2hex(...hsl2rgb(hue.value, sat.value / 100, lum.value / 100))
     // rainbow.setSpectrum(document.getElementById("col1").value, document.getElementById("col2").value, document.getElementById("col3").value);
     rainbow.setSpectrum(col1, '#FFFFFF');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    points.forEach(h => {
-        h.show();
-        if (nearestPoint === undefined || h.distanceToMouse < nearestPoint.distanceToMouse) {
-            nearestPoint = h;
-        }
-    });
+
+    ctx.fillStyle = "white";
+    ctx.font = "5rem monospace"
+    ctx.fillText((1000 / frameTime).toFixed(1), 100, 100)
+
     for (let i = 1; i < lines.length; i++) {
         let color = '#' + rainbow.colourAt(lines[i].c);;
-        // let color = 'hsl(' + lines[i].c + ',100%,' + (50 + lines[i].c / 1.8) + '%)';
         if (i + 1 < lines.length && lines[i + 1].a == 1) {
             let vec = [lines[i].x2 - lines[i].x, lines[i].y2 - lines[i].y]
             let length = Math.sqrt(vec[0] ** 2 + vec[1] ** 2);

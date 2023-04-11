@@ -7,8 +7,8 @@ class Point {
 
     show() {
         // ctx.point(this.x, this.y)
-        ctx.fillStyle = "black";
-        ctx.fillRect(this.x-2, this.y-2, 4, 4);
+        bgctx.fillStyle = "black";
+        bgctx.fillRect(this.x-2, this.y-2, 4, 4);
     }
 
     get distanceToMouse() {
