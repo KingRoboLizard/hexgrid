@@ -334,18 +334,19 @@ window.requestAnimationFrame(loop);
 var filterStrength = 60;
 var frameTime = 0, lastLoop = new Date, thisLoop;
 function loop() {
-    var thisFrameTime = (thisLoop = new Date) - lastLoop;
-    frameTime += (thisFrameTime - frameTime) / filterStrength;
-    lastLoop = thisLoop;
+    // var thisFrameTime = (thisLoop = new Date) - lastLoop;
+    // frameTime += (thisFrameTime - frameTime) / filterStrength;
+    // lastLoop = thisLoop;
 
     col1 = rgb2hex(...hsl2rgb(hue.value, sat.value / 100, lum.value / 100))
     // rainbow.setSpectrum(document.getElementById("col1").value, document.getElementById("col2").value, document.getElementById("col3").value);
     rainbow.setSpectrum(col1, '#FFFFFF');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = "white";
-    ctx.font = "5rem monospace"
-    ctx.fillText((1000 / frameTime).toFixed(1), 100, 100)
+    //display fps
+    // ctx.fillStyle = "white";
+    // ctx.font = "2rem monospace"
+    // ctx.fillText((1000 / frameTime).toFixed(1), 100, 100)
 
     for (let i = 1; i < lines.length; i++) {
         let color = '#' + rainbow.colourAt(lines[i].c);;
