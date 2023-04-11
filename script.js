@@ -210,29 +210,20 @@ function updateCol() {
     document.getElementById("b").value = Math.round(rgb[2] * 255);
 }
 
-let patternList;
-readTextFile("patterns.txt")
-function readTextFile(file) {
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = function () {
-        if (rawFile.readyState === 4) {
-            if (rawFile.status === 200 || rawFile.status == 0) {
-                var allText = rawFile.responseText;
-                patternList = allText;
-            }
-        }
-    }
-    rawFile.send(null);
-}
-patternList = patternList.split("\r\n");
+let patternList = "";
 let patternOrders = [];
 let patternNames = [];
-for (let i = 0; i < patternList.length; i++) {
-    let divided = patternList[i].split(":");
-    patternOrders.push(divided[0]);
-    patternNames.push(divided[1]);
-}
+
+fetch('patterns.txt')
+    .then(response => response.text())
+    .then(text => { patternList = text; console.log(text) }).then(() => {
+        patternList = patternList.split("\r\n");
+        for (let i = 0; i < patternList.length; i++) {
+            let divided = patternList[i].split(":");
+            patternOrders.push(divided[0]);
+            patternNames.push(divided[1]);
+        }
+    })
 
 let nearestPoint;
 let lines = []
