@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.png">
+    <title>HexGrid</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="point.js" defer></script>
+    <script src="line.js" defer></script>
+    <script src="spellviz.js" defer></script>
+    <script src="rainbowvis.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <canvas class="drawgrid"></canvas>
+    <!-- <input type="color" id="col1" value="#FF0000">
+            <input type="color" id="col2" value="#FFFF00">
+            <input type="color" id="col3" value="#FFFFFF">
+            <button type="button" id="colButton">+</button> -->
+    <button id="modalButton"> Open Modal</button>
+    <!-- <div class="modal" id="modal"> -->
+    <div class="colContainer" id="modal">
+        <div class="header" id="modalheader">
+        </div>
+        <span class="close">&times;</span>
+        <div id="colDisplay">
+            <input type="range" min="0" max="360" value="0" id="hue">
+            <input type="range" min="0" max="100" value="80" id="sat">
+            <input type="range" min="0" max="100" value="50" id="lum">
+            <input type="text" maxlength="7" id="hex">
+            <input type="number" min="0" max="255" id="r"><!--
+            --><input type="number" min="0" max="255" id="g"><!--
+            --><input type="number" min="0" max="255" id="b">
+        </div>
+        <!-- <header>
+                <h3>Header</h3>
+            </header>
+        </div>
+        <br>
+        <div id="modalcontents">
+            <h3>Explosion (vector, number →)</h3>
+            <canvas class="spell-viz" data-string="aawaawaa" data-start="east" data-per-world="False" width="500"
+                height="500"></canvas>
+            <p>
+                Remove a number and vector from the stack, then create an explosion at the given location with the given
+                power.
+            </p>
+            <p>
+                A power of 3 is about as much as a Creeper's blast; 4 is about as much as a TNT blast. Nature refuses to
+                give me a blast of more than 10 power, though.
+            </p>
+            <p>
+                Strangely, this explosion doesn't seem to harm me. Perhaps it's because I am the one exploding?
+            </p>
+            <p>
+                Costs a negligible amount at power 0, plus 3 extra Amethyst Dust per point of explosion power.
+            </p>
+        </div> -->
+    </div>
+    </div>
+</body>
+
+</html>
