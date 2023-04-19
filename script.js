@@ -217,7 +217,7 @@ let patternNames = [];
 fetch('patterns.txt')
     .then(response => response.text())
     .then(text => { patternList = text; console.log(text) }).then(() => {
-        patternList = patternList.split("\r\n");
+        patternList = patternList.split("\n");
         for (let i = 0; i < patternList.length; i++) {
             let divided = patternList[i].split(":");
             patternOrders.push(divided[0]);
