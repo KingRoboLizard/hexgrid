@@ -221,7 +221,7 @@ fetch('patterns.txt')
         for (let i = 0; i < patternList.length; i++) {
             let divided = patternList[i].split(":");
             patternOrders.push(divided[0]);
-            patternNames.push(divided[1]);
+            patternNames.push(divided[1].trim());
         }
     })
 
@@ -286,7 +286,7 @@ function NormalizeVec(vec, targetLength, angle) {
         }
         lines.forEach(line => {
             newLine = new Line(clickX, clickY, clickX + vec[0], clickY + vec[1], 0);
-            let val = Math.abs((line.x - newLine.x + line.y - newLine.y + line.x2 - newLine.x2 + line.y2 - newLine.y2));
+            let val = Math.abs(line.x - newLine.x + line.y - newLine.y + line.x2 - newLine.x2 + line.y2 - newLine.y2);
             if (val < 1) {
                 e = true;
                 return origVec;
@@ -459,12 +459,10 @@ function pattern() {
         lastdir = a;
         tempList.pop();
     }
-    stack.push(" Undefined")
     dir = dir.split("").reverse().join("");
     for (let i = 0; i < patternOrders.length - 1; i++) {
         if (dir == patternOrders[i]) {
             console.log(patternNames[i]);
-            stack.pop();
             stack.push(patternNames[i]);
             if (i != 167) {
                 return;
@@ -509,6 +507,7 @@ function pattern() {
         stack.push("undo");
     }
     else {
+        stack.push(" Undefined")
         console.log("invalid pattern")
     }
 }

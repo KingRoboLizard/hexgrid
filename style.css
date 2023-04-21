@@ -6,55 +6,6 @@ body {
     overflow: hidden;
 }
 
-summary {
-    display: list-item;
-}
-
-details.spell-collapsible {
-    display: inline-block;
-    border: 1px solid #aaa;
-    border-radius: 4px;
-    padding: .5em .5em 0;
-    margin-bottom: .5em;
-}
-
-summary.collapse-spell {
-    font-weight: bold;
-    margin: -.5em -.5em 0;
-    padding: .5em;
-}
-
-details.spell-collapsible[open] {
-    padding: .5em;
-}
-
-details[open] summary.collapse-spell {
-    border-bottom: 1px solid #aaa;
-    margin-bottom: .5em;
-}
-
-details .collapse-spell::before {
-    content: "Click to show spell";
-}
-
-details[open] .collapse-spell::before {
-    content: "Click to hide spell";
-}
-
-canvas.spell-viz {
-    --dot-color: #777f;
-    --start-dot-color: #f009;
-    --moving-dot-color: #0fa9;
-
-    --path-color: darkgray;
-    --visited-path-color: #0c8;
-
-    --dot-scale: 0.0625;
-    --moving-dot-scale: 0.125;
-    --line-scale: 0.08333;
-    --pausetext-scale: 0.5;
-}
-
 canvas.drawgrid {
     position: absolute;
     top: 0%;
@@ -224,25 +175,6 @@ output {
     left: -50px;
     top: -10px;
 }
-
-/* .modal {
-    display: none;
-    z-index: 1;
-    width: 20rem;
-    height: 30rem;
-    border: 1px solid;
-    background-color: rgba(23, 17, 41, 0.6);
-    color: white;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    overflow: auto;
-    overscroll-behavior: contain;
-    border-radius: 3px;
-    scrollbar-color: rgba(255, 255, 255, 0.4) rgba(0, 0, 0, 0);
-    scrollbar-width: thin;
-} */
 
 button {
     border: 1px solid white;
